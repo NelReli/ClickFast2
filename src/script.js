@@ -8,6 +8,7 @@ let count_click = document.getElementById("count");
 let number_click = document.getElementById("number_click");
 const game = document.getElementById("game");
 const rejouer = document.getElementById("rejouer");
+const information = document.getElementById("information")
 
 
 function demarrerJeu(){
@@ -15,14 +16,14 @@ function demarrerJeu(){
     total_click = 0;
     game.style.display = 'none';
     rejouer.style.display = 'none';
+    information.style.display = 'none';
     number_click.style.display = 'block';
     congratulations.innerText = '';
     count_click.innerText = '';
     timerElement.innerText = temps;
 
     const interval = setInterval(() => {
-
-      timerElement.innerText = temps;
+      timerElement.innerText = `Il reste ${temps} secondes`;
       temps = temps <= 0 ? 0 : temps - 1
 
       if (temps === 0 ){
@@ -30,7 +31,11 @@ function demarrerJeu(){
         number_click.style.display = 'none';
         rejouer.style.display = 'block';
         timerElement.innerText = '';
-        congratulations.innerText = `Bravo, vous avez cummulé ${total_click} clique en ${DUREE} secondes`;
+        if (total_click === 0){
+          congratulations.innerText = "Vous pouvez faire mieux"
+        } else {
+          congratulations.innerText = `Bravo, vous avez cummulé ${total_click} cliques en ${DUREE} secondes`;
+        }
         meilleur_scores();
       };
 
