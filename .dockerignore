@@ -1,0 +1,3 @@
+node_modules/     → des milliers de fichiers inutiles
+.git/             → tout l'historique Git
+.env              → mots de passe, clés API ⚠️
