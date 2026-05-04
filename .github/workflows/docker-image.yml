@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Run tests
-      run: npm test
+      run: npx jest
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag clickfast:$(date +%s)
