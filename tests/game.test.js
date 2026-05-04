@@ -1,5 +1,5 @@
 // on importe
-const { decrementerTemps, incrementerClics, peutCliquer } = require('../src/game.logic');
+const { decrementerTemps, incrementerClics, peutCliquer, getTop5 } = require('../src/game.logic');
 
 test('verification decrementation du temps', () => {
     expect(decrementerTemps(10)).toBe(9);
@@ -15,3 +15,8 @@ test('verification clique apres temps ecouler', () => {
     expect(peutCliquer(5)).toBe(true);
     expect(peutCliquer(0)).toBe(false);
 });
+
+test('verification affichage 5meilleur scores', () => {
+    expect(getTop5([10, 45, 3, 67, 28, 92, 15])).toEqual([92, 67, 45, 28, 15]);
+});
+
