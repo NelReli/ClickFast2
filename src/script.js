@@ -20,15 +20,17 @@ const retour = document.getElementById('retour')
 progress.style.width = '100%'
 accueil.classList.add('active')
 
-let score
-let tempsRestant 
+let score = 0
+let tempsRestant = 0
 
-start_game.addEventListener('click', () => {
-    accueil.classList.remove('active')
-    jeu.classList.add('active')
-    game.disabled = false
-    jouerJeu()
-})
+function handleStartButton() {
+    start_game.addEventListener('click', () => {
+        accueil.classList.remove('active')
+        jeu.classList.add('active')
+        game.disabled = false
+        jouerJeu()
+    })
+}
 
 function changerSection(cacher, montrer) {
     cacher.classList.remove('active')
@@ -43,7 +45,7 @@ async function jouerJeu() {
     progress.style.width = '100%'
 
     pseudo.forEach(el => {
-        el.textContent = balisePseudo.value.trim() === '' ? 'Anonyme' : balisePseudo.value.trim()
+        el.textContent = getPseudo(balisePseudo.value.trim())
     })
 
     let interval = setInterval(() => {
@@ -54,17 +56,9 @@ async function jouerJeu() {
         if (tempsRestant <= 0) {
             clearInterval(interval)
             game.disabled = true
-            moyenne.textContent = `${score / 5} clics / seconde`
+            moyenne.textContent = `${getMoyenne(score, 5)} clics / seconde`
 
-            if (score > 30) {
-                phrase.textContent = 'Incroyable ! Tu es une machine !'
-            } else if (score > 20) {
-                phrase.textContent = 'Excellent ! Réflexes de pro !'
-            } else if (score > 10) {
-                phrase.textContent = 'Bien joué ! Tu peux faire mieux !'
-            } else {
-                phrase.textContent = 'Bonne première tentative !'
-            }
+            phrase.textContent = getPhrase(score)
 
             sauvegarderScore(balisePseudo.value.trim() || 'Anonyme', score)
 
@@ -78,10 +72,12 @@ async function jouerJeu() {
     }, 1000)
 }
 
-game.addEventListener('click', () => {
-    score++
-    count.forEach(el => { el.textContent = score })
-})
+function handleGameButton() {
+    game.addEventListener('click', () => {
+        score++
+        count.forEach(el => { el.textContent = score })
+    })
+}
 
 const example = document.querySelector(".example-element")
 example.addEventListener("click", () => {
@@ -91,11 +87,13 @@ example.addEventListener("click", () => {
     }, 100)
 })
 
-rejouer.addEventListener('click', () => {
-    changerSection(resultat, jeu)
-    game.disabled = false
-    jouerJeu()
-})
+function handleRejouerButton() {
+    rejouer.addEventListener('click', () => {
+        changerSection(resultat, jeu)
+        game.disabled = false
+        jouerJeu()
+    })
+}
 
 btnClassement1.addEventListener('click', () => {
     changerSection(accueil, classement)
@@ -118,6 +116,14 @@ function sauvegarderScore(pseudo, score) {
     scores.sort((a, b) => b.score - a.score) // tri décroissant
     scores = scores.slice(0, 5) // garde les 5 meilleurs
     localStorage.setItem('scores', JSON.stringify(scores))
+}
+
+handleStartButton()
+handleGameButton()
+handleRejouerButton()
+
+if (typeof module !== 'undefined') {
+    module.exports = { handleStartButton, handleGameButton, handleRejouerButton, jouerJeu, score }
 }
 
 // function afficherClassement() {

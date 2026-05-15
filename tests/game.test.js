@@ -1,5 +1,5 @@
 // on importe
-const { decrementerTemps, incrementerClics, peutCliquer, getTop5 } = require('../src/game.logic');
+const { decrementerTemps, incrementerClics, peutCliquer, getTop5, getPseudo, getMoyenne, getPhrase } = require('../src/game.logic');
 
 test('verification decrementation du temps', () => {
     expect(decrementerTemps(10)).toBe(9);
@@ -20,3 +20,20 @@ test('verification affichage 5meilleur scores', () => {
     expect(getTop5([10, 45, 3, 67, 28, 92, 15])).toEqual([92, 67, 45, 28, 15]);
 });
 
+test('pseudo vide retourne Anonyme', () => {
+    expect(getPseudo('')).toBe('Anonyme')
+    expect(getPseudo('   ')).toBe('Anonyme')
+    expect(getPseudo('John')).toBe('John')
+})
+
+test('calcul moyenne clics par seconde', () => {
+    expect(getMoyenne(20, 5)).toBe(4)
+    expect(getMoyenne(0, 5)).toBe(0)
+})
+
+test('message de fin selon le score', () => {
+    expect(getPhrase(35)).toBe('Incroyable ! Tu es une machine !')
+    expect(getPhrase(25)).toBe('Excellent ! Réflexes de pro !')
+    expect(getPhrase(15)).toBe('Bien joué ! Tu peux faire mieux !')
+    expect(getPhrase(5)).toBe('Bonne première tentative !')
+})
