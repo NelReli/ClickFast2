@@ -70,6 +70,7 @@ async function jouerJeu() {
             }, 100)
         }
     }, 1000)
+
 }
 
 function handleGameButton() {
