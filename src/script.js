@@ -113,6 +113,7 @@ retour.addEventListener('click', () => {
 
 function sauvegarderScore(pseudo, score) {
     let scores = JSON.parse(localStorage.getItem('scores')) || []
+    scores.filter(entry => entry !== null)
     scores.push({ pseudo, score, date: new Date().toLocaleDateString('fr-FR') })
     scores.sort((a, b) => b.score - a.score) // tri décroissant
     scores = scores.slice(0, 5) // garde les 5 meilleurs
