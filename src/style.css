@@ -1,3 +1,67 @@
-#timer {
+#timer, .count {
     font-weight: bold;
+}
+
+body{
+    background-color: rgb(27, 25, 25);
+}
+
+.letter-spacing{
+    letter-spacing: 10px;
+}
+
+.p40{
+    font-size:40px;
+}
+
+#example-element {
+    transition: transform 0.3s ease;
+}
+
+.shadow-red{
+    box-shadow: 0 0 10px #dc3545, 0 0 30px #dc3545, 0 0 60px #dc3545;
+}
+
+input:focus{
+    outline: 2px solid #dc3545;
+}
+
+#jouer{
+    display: flex;
+}
+
+.color:hover{
+    border-color: #dc3545 !important;
+    transition: border-color 0.3s ease;
+}
+
+.dflex{
+    display: flex;
+}
+
+.progress-bar {
+    height: 100%;
+    transition: width 1s linear;
+}
+
+section {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+section.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.flip{
+    display: inline-block;
+    transform: scale(-1, 1);
 }

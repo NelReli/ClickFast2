@@ -9,28 +9,121 @@
 </head>
 <body>
 
-    <h1 class="m-5 mx-auto text-center border border-clear p-3 shadow text-uppercase" style="width: 30rem;">Jeu : ClickFast</h1>
+<!-- // page accueil -->
 
-    <div class="card text-center m-auto shadow" style="width: 18rem; height: 18rem;">
-        <div class="card-body">
-
-            <button class="btn btn-primary m-3"id="game">Jouer</button>
-            <p id="information"> Vous avez 5 secondes pour essayer de cliquer le plus possible <br> Bon courage !!!</p>
-            <button id="number_click" class="btn btn-primary m-3 mx-auto"  style="display: none;">Cliquez moi</button>
-            
-            <div id="count" class="m-3 fs-1"></div>
-            <div id="timer" class="m-3"></div>
-            <div id="congratulations" class="m-3"></div>
-            <button id="rejouer" class="mx-auto m-4 btn btn-primary" style="display: none;">Rejouer</button>
-            
+<section id="accueil" class="bg-dark justify-content-center align-items-center">
+    <div class="text-center">
+        <div class="card shadow-lg border border-secondary p-5 bg-dark border rounded-5" style="width: 30rem;">
+            <h1 class="card-title text-white mb-5 letter-spacing">Clic<span class="flip">k</span> <b class="text-danger">FAST</b></h1>
+            <p class="card-text mb-5 text-white ">Cliquez le plus vite possible <br> pendant <b>5 secondes !</b></p>
+            <div class="gap-3 d-flex flex-column justify-content-center align-itels-center">
+                <input id="input_pseudo" type="text" class=" p-2 rounded px-3 border-0" placeholder="Votre pseudo...">
+                <button id="start_game" class="btn btn-danger">Jouer</button>
+                <button id="btnClassement1" class="btn btn-light">Classement</button>
+            </div>
         </div>
     </div>
-    <div class="card m-5 mx-auto" style="width: 30rem; ">
-        <div class="card-body">
-            <ol id="list" class="m-4 ">Meilleur scores</ol>
+</section>
+
+<!-- // page jeu -->
+
+<section id="jeu" class="bg-dark flex-column justify-content-center align-items-center">
+    <div class="text-white text-center">
+
+        <div class="d-flex gap-4 mb-4 justify-content-center align-items-center">
+            <div class="border border-secondary rounded text-white p-2 " style="width: 6rem; ">
+                <p class="mb-0">TEMPS</p>
+                <p id="timer" class="mb-0 p40"><strong></strong></p>
+            </div>
+            <div class="border border-secondary rounded p-2" style="width: 6rem; ">
+                <p class="mb-0">SCORE</p>
+                <p class="count mb-0 p40"><strong></strong></p>
+            </div>
+        </div>
+
+        <div id="progress" class="progress-bar bg-danger " style=" height: 0.2rem;"></div>
+
+        <button id="game" class="example-element btn btn-danger m-4 rounded-circle letter-spacing shadow-lg" style="width: 15rem; height: 15rem;"><strong>Cliquez !</strong></button>
+        <p class="pseudo"></p>
+
+    </div>
+</section>
+
+<!-- // page resultat -->
+
+<section id="resultat" class="justify-content-center align-items-center">
+    
+    <div class="text-center ">
+        <div class="card shadow border border-secondary p-5 bg-dark mb-2 text-white rounded-5" style="width: 30rem;">
+            <h1 class="card-title mb-5 letter-spacing">RÉSULTAT</h1>
+            <p class="pseudo card-text"></p>
+            <p class="count text-danger p40"><strong></strong></p>
+            <p>clics</p>
+            <p id = 'moyenne'></p>
+            <p id="phrase"></p>
+            <div class="gap-3 d-flex flex-column justify-content-center align-itels-center">
+                <button id="rejouer" class="btn btn-danger">Rejouer</button>
+                <button id="btnClassement2" class="btn btn-light">Classement</button>
+            </div>
         </div>
     </div>
+</section>
 
+<!-- // page classement -->
+
+<section id="classement" class="bg-dark justify-content-center align-items-center text-white">
+    
+    <div class="card shadow border border-secondary p-5 bg-dark text-white text-center rounded-5" style="width: 30rem;">
+        <h1 class="card-title mb-5 letter-spacing">CLASSEMENT</h1>
+        <div>
+
+        </div>
+        <button id="retour" class="btn btn-light">Retour</button>
+    </div>
+</section>
+
+
+    <script src="api.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
+<!-- 
+
+<div class="card shadow border border-secondary p-5 bg-dark text-white rounded-5" style="width: 30rem;">
+            <h1 class="card-title mb-5 letter-spacing">CLASSEMENT</h1>
+            <div class="card color bg-dark mb-2 text-white border border-secondary">
+                <div class=" justify-content-between p-2 dflex">
+                    <p class="mb-0">1</p>
+                    <p class="pseudo card-text mb-0"></p>
+                    <p class="count mb-0"></p>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            <div class="card color bg-dark mb-2 text-white border border-secondary">
+                <div class="justify-content-between p-2 dflex">
+                    <p class="mb-0">1</p>
+                    <p class="pseudo card-text mb-0"></p>
+                    <p class="count mb-0"></p>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            <div class="card color bg-dark mb-2 text-white border border-secondary">
+                <div class="justify-content-between p-2 dflex">
+                    <p class="mb-0">1</p>
+                    <p class="pseudo card-text mb-0"></p>
+                    <p class="count mb-0"></p>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            <div class="card color bg-dark mb-2 text-white border border-secondary">
+                <div class="justify-content-between p-2 dflex">
+                    <p class="mb-0">1</p>
+                    <p class="pseudo card-text mb-0"></p>
+                    <p class="count mb-0"></p>
+                    <p class="mb-0"></p>
+                </div>
+            </div>
+            <button id="retour" class="btn btn-light">Retour</button>
+            
+
+        </div> -->

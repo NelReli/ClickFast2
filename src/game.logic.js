@@ -19,3 +19,4 @@ function getTop5(scores) {
 
 // on exporte
 module.exports = { decrementerTemps, incrementerClics, peutCliquer, getTop5 };
+
