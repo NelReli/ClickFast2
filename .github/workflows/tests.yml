@@ -20,7 +20,7 @@ jobs:
           node-version: '20'
 
       - name: Installer les dépendances
-        run: npm install
+        run: npm ci
 
       - name: Lancer les tests
-        run: ./node_modules/.bin/jest --env=jsdom
+        run: npm test
