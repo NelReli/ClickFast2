@@ -1,3 +1,9 @@
+const isNode = typeof require !== 'undefined' && typeof window === 'undefined'
+if (isNode) {
+    var { getPseudo, getMoyenne, getPhrase, incrementerClics, decrementerTemps, peutCliquer } = require('./game.logic.js')
+}  
+
+
 const start_game = document.getElementById('start_game')
 const accueil = document.getElementById('accueil')
 const jeu = document.getElementById('jeu')
@@ -45,25 +51,21 @@ async function jouerJeu() {
     progress.style.width = '100%'
 
     pseudo.forEach(el => {
-        el.textContent = getPseudo(balisePseudo.value.trim())
+        el.textContent = getPseudo(balisePseudo.value)
     })
 
     let interval = setInterval(() => {
-        tempsRestant--
+        tempsRestant = decrementerTemps(tempsRestant)
         timer.textContent = tempsRestant
         progress.style.width = ((tempsRestant - 1) / 5 * 100) + '%'
 
-        if (tempsRestant <= 0) {
+        if (!peutCliquer(tempsRestant)) {
             clearInterval(interval)
             game.disabled = true
             moyenne.textContent = `${getMoyenne(score, 5)} clics / seconde`
-
             phrase.textContent = getPhrase(score)
-
             sauvegarderScore(balisePseudo.value.trim() || 'Anonyme', score)
-
             sauvegarderScoreAPI(balisePseudo.value.trim() || 'Anonyme', score)
-
             setTimeout(() => {
                 changerSection(jeu, resultat)
                 progress.style.width = '100%'
@@ -75,7 +77,7 @@ async function jouerJeu() {
 
 function handleGameButton() {
     game.addEventListener('click', () => {
-        score++
+        score = incrementerClics(score)
         count.forEach(el => { el.textContent = score })
     })
 }
@@ -124,7 +126,13 @@ handleGameButton()
 handleRejouerButton()
 
 if (typeof module !== 'undefined') {
-    module.exports = { handleStartButton, handleGameButton, handleRejouerButton, jouerJeu, score }
+    module.exports = { 
+        handleStartButton, 
+        handleGameButton, 
+        handleRejouerButton, 
+        jouerJeu,
+        getScore: () => score   // ✅ getter au lieu de la valeur figée
+    }
 }
 
 // function afficherClassement() {

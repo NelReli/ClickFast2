@@ -1,9 +1,8 @@
-// Décrémenter le temps
+
 function decrementerTemps(temps) {
     return temps <= 0 ? 0 : temps - 1;
 }
 
-// Incrémenter les clics
 function incrementerClics(total) {
     return total + 1;
 }
@@ -32,12 +31,4 @@ function getPhrase(score) {
     return 'Bonne première tentative !'
 }
 
-if (typeof window !== 'undefined') {
-    window.getPseudo = getPseudo
-    window.getMoyenne = getMoyenne
-    window.getPhrase = getPhrase
-}
-
-// on exporte
 module.exports = { decrementerTemps, incrementerClics, peutCliquer, getTop5, getPseudo, getMoyenne, getPhrase };
-
