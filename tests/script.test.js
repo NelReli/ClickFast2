@@ -1,33 +1,43 @@
-document.body.innerHTML = `
-    <input id="input_pseudo" value="TestUser" />
-    <button id="start_game">Jouer</button>
-    <button id="game">Click!</button>
-    <button id="rejouer">Rejouer</button>
-    <button id="btnClassement1">Classement</button>
-    <button id="btnClassement2">Classement</button>
-    <button id="retour">Retour</button>
-    <div id="accueil"></div>
-    <div id="jeu"></div>
-    <div id="resultat"></div>
-    <div id="classement"><div><div></div></div></div>
-    <div id="timer"></div>
-    <div id="progress" style="width: 100%"></div>
-    <div id="moyenne"></div>
-    <div id="phrase"></div>
-    <p class="pseudo"></p>
-    <p class="count">0</p>
-    <div class="example-element"></div>
-`
+// Supprimer les require en haut du fichier
+// et les mettre dans un beforeEach
 
-const { handleGameButton, getScore } = require('../src/script.js')
-const { peutCliquer } = require('../src/game.logic')
+let handleGameButton, getScore, peutCliquer
+
+beforeEach(() => {
+    // Remettre le DOM à zéro
+    document.body.innerHTML = `
+        <input id="input_pseudo" value="TestUser" />
+        <button id="start_game">Jouer</button>
+        <button id="game">Click!</button>
+        <button id="rejouer">Rejouer</button>
+        <button id="btnClassement1">Classement</button>
+        <button id="btnClassement2">Classement</button>
+        <button id="retour">Retour</button>
+        <div id="accueil"></div>
+        <div id="jeu"></div>
+        <div id="resultat"></div>
+        <div id="classement"><div><div></div></div></div>
+        <div id="timer"></div>
+        <div id="progress" style="width: 100%"></div>
+        <div id="moyenne"></div>
+        <div id="phrase"></div>
+        <p class="pseudo"></p>
+        <p class="count">0</p>
+        <div class="example-element"></div>
+    `
+
+    // Vider le cache des modules pour repartir à zéro
+    jest.resetModules()
+
+    // Réimporter à chaque test
+    const script = require('../src/script.js')
+    const logic = require('../src/game.logic')
+    handleGameButton = script.handleGameButton
+    getScore = script.getScore
+    peutCliquer = logic.peutCliquer
+})
 
 describe("Tests ClickFast — DOM", () => {
-
-    beforeEach(() => {
-        document.getElementById('game').disabled = false
-        document.querySelector('.count').textContent = '0'
-    })
 
     test("le score s'incrémente au clic (DOM)", () => {
         const btn = document.getElementById('game')
@@ -39,20 +49,18 @@ describe("Tests ClickFast — DOM", () => {
 
     test("le score s'incrémente au clic (variable)", () => {
         const btn = document.getElementById('game')
-        const avant = getScore()  // ← getter, pas une copie figée
+        const avant = getScore()
         btn.click()
         btn.click()
         expect(getScore()).toBe(avant + 2)
     })
 
     test("le bouton est désactivé quand temps écoulé", () => {
-        // On vérifie la logique, pas le comportement JSDOM
         expect(peutCliquer(0)).toBe(false)
         expect(peutCliquer(5)).toBe(true)
     })
 
-    test("le score ne change pas si bouton disabled (via peutCliquer)", () => {
-        // JSDOM ne bloque pas les clics, donc on teste la règle métier
+    test("le score ne change pas si bouton disabled", () => {
         const tempsRestant = 0
         const scoreAvant = getScore()
         
@@ -60,12 +68,10 @@ describe("Tests ClickFast — DOM", () => {
             document.getElementById('game').click()
         }
 
-        expect(getScore()).toBe(scoreAvant) // pas de clic car temps = 0
+        expect(getScore()).toBe(scoreAvant)
     })
 
     test("le pseudo vide affiche Anonyme", () => {
-        document.getElementById('input_pseudo').value = ''
-        // getPseudo est utilisé dans jouerJeu — on teste la logique directement
         const { getPseudo } = require('../src/game.logic')
         expect(getPseudo('')).toBe('Anonyme')
     })
