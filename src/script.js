@@ -1,7 +1,7 @@
 // Tout en haut de script.js
 let getPseudo, getMoyenne, getPhrase, incrementerClics, decrementerTemps, peutCliquer
 
-if (typeof module !== 'undefined') {
+if (typeof require !== 'undefined') {
     const logic = require('./game.logic.js')
     getPseudo = logic.getPseudo
     getMoyenne = logic.getMoyenne

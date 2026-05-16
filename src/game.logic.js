@@ -31,4 +31,6 @@ function getPhrase(score) {
     return 'Bonne première tentative !'
 }
 
-module.exports = { decrementerTemps, incrementerClics, peutCliquer, getTop5, getPseudo, getMoyenne, getPhrase };
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { decrementerTemps, incrementerClics, peutCliquer, getTop5, getPseudo, getMoyenne, getPhrase };
+}
