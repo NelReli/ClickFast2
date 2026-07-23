@@ -35,15 +35,12 @@ beforeEach(() => {
     handleGameButton = script.handleGameButton
     getScore = script.getScore
     peutCliquer = logic.peutCliquer
-    
-    handleGameButton()
 })
 
 describe("Tests ClickFast — DOM", () => {
 
     test("le score s'incrémente au clic (DOM)", () => {
         const btn = document.getElementById('game')
-        btn.disabled = false
         btn.click()
         btn.click()
         btn.click()
