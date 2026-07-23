@@ -35,6 +35,14 @@ beforeEach(() => {
     handleGameButton = script.handleGameButton
     getScore = script.getScore
     peutCliquer = logic.peutCliquer
+
+    // réinitialise le bouton
+    const btn = document.getElementById('game')
+    btn.disabled = false
+    const newBtn = btn.cloneNode(true)
+    btn.parentNode.replaceChild(newBtn, btn)
+    
+    handleGameButton()
 })
 
 describe("Tests ClickFast — DOM", () => {
