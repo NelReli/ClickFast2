@@ -1,15 +1,15 @@
 // Tout en haut de script.js
-let getPseudo, getMoyenne, getPhrase, incrementerClics, decrementerTemps, peutCliquer
+// let getPseudo, getMoyenne, getPhrase, incrementerClics, decrementerTemps, peutCliquer
 
-if (typeof require !== 'undefined') {
-    const logic = require('./game.logic.js')
-    getPseudo = logic.getPseudo
-    getMoyenne = logic.getMoyenne
-    getPhrase = logic.getPhrase
-    incrementerClics = logic.incrementerClics
-    decrementerTemps = logic.decrementerTemps
-    peutCliquer = logic.peutCliquer
-}
+// if (typeof require !== 'undefined') {
+//     const logic = require('./game.logic.js')
+//     getPseudo = logic.getPseudo
+//     getMoyenne = logic.getMoyenne
+//     getPhrase = logic.getPhrase
+//     incrementerClics = logic.incrementerClics
+//     decrementerTemps = logic.decrementerTemps
+//     peutCliquer = logic.peutCliquer
+// }
 
 
 const start_game = document.getElementById('start_game')
